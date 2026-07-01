@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
 import { 
   Zap, 
   Calendar, 
@@ -16,12 +16,15 @@ import {
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Solutions from './components/Solutions';
+import GrowthTheater from './components/GrowthTheater';
 import Portfolio from './components/Portfolio';
 import Method from './components/Method';
 import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
 
 export default function App() {
+  const { scrollYProgress } = useScroll();
+  const smoothScrollProgress = useSpring(scrollYProgress, { stiffness: 120, damping: 24, mass: 0.3 });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalStep, setModalStep] = useState<1 | 2>(1);
   const [modalLoading, setModalLoading] = useState(false);
@@ -105,6 +108,10 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-brand-base text-brand-text font-sans antialiased overflow-x-hidden selection:bg-brand-action selection:text-brand-black">
+      <motion.div
+        className="fixed left-0 top-0 z-[60] h-1 origin-left bg-gradient-to-r from-brand-action via-white to-brand-support shadow-[0_0_18px_rgba(0,229,255,0.75)]"
+        style={{ scaleX: smoothScrollProgress }}
+      />
       
       {/* Navigation Header */}
       <Navbar onOpenConsultation={handleOpenConsultation} />
@@ -113,6 +120,8 @@ export default function App() {
       <Hero onCtaClick={handleHeroCta} />
       
       <Solutions />
+
+      <GrowthTheater />
       
       <Portfolio />
       
