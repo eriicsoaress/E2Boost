@@ -1,0 +1,6 @@
+{
+  "name": "E2Boost",
+  "description": "Infraestrutura digital sólida, tráfego pago acelerado e gerenciamento premium para escalar o seu negócio.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
