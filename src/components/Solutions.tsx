@@ -143,7 +143,7 @@ export default function Solutions() {
                   <ul className="space-y-2">
                     {sol.features.map((feature, fIdx) => (
                       <li key={fIdx} className="flex items-start gap-2 text-xs text-brand-text/80 font-sans">
-                        <Check className="w-4 h-4 text-brand-action flex-shrink-0 mt-0.5" />
+                        <Check className="w-4 h-4 text-brand-action shrink-0 mt-0.5" />
                         <span>{feature}</span>
                       </li>
                     ))}

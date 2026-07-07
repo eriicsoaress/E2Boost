@@ -204,12 +204,12 @@ export default function Portfolio() {
                   <span className="w-2 h-2 rounded-full bg-yellow-500/50 block"></span>
                   <span className="w-2 h-2 rounded-full bg-green-500/50 block"></span>
                 </div>
-                <div className="w-full max-w-[360px] h-4 bg-white/10 rounded px-2 flex items-center justify-center text-[8px] font-mono text-brand-text/50 overflow-hidden text-ellipsis whitespace-nowrap">
+                <div className="w-full max-w-90 h-4 bg-white/10 rounded px-2 flex items-center justify-center text-[8px] font-mono text-brand-text/50 overflow-hidden text-ellipsis whitespace-nowrap">
                   {activeProject.url}
                 </div>
               </div>
 
-              <div className="relative aspect-[16/10] bg-brand-base overflow-hidden">
+              <div className="relative aspect-16/10 bg-brand-base overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={`${activeProject.id}-${activeSlide}`}
@@ -224,7 +224,7 @@ export default function Portfolio() {
                   />
                 </AnimatePresence>
 
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-brand-black via-brand-black/70 to-transparent p-5 pt-16">
+                <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-brand-black via-brand-black/70 to-transparent p-5 pt-16">
                   <p className="text-sm sm:text-base font-sans font-semibold text-brand-text">
                     {currentSlide.caption}
                   </p>
@@ -249,7 +249,7 @@ export default function Portfolio() {
                 </button>
               </div>
 
-              <div className="flex items-center justify-center gap-2 p-4 bg-white/[0.03] border-t border-white/10">
+              <div className="flex items-center justify-center gap-2 p-4 bg-white/3 border-t border-white/10">
                 {activeProject.screenshots.map((screenshot, index) => (
                   <button
                     key={screenshot.caption}

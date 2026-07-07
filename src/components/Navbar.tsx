@@ -70,7 +70,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer" onClick={() => scrollToSection('home')}>
+          <div className="shrink-0 flex items-center gap-2 cursor-pointer" onClick={() => scrollToSection('home')}>
             <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-brand-support/20 border border-brand-action/40 shadow-[0_0_15px_rgba(0,229,255,0.2)]">
               <Zap className="w-5 h-5 text-brand-action animate-pulse" />
               <div className="absolute inset-0 rounded-xl bg-brand-action/5 blur-sm"></div>
@@ -95,7 +95,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
                   {activeSection === item.target && (
                     <motion.div
                       layoutId="activeNavLine"
-                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-action shadow-[0_0_8px_rgba(0,229,255,0.8)]"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-action shadow-[0_0_8px_rgba(0,229,255,0.8)]"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
