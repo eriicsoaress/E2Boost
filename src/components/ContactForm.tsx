@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Send, CheckCircle2, AlertCircle, Loader2, Sparkles, MessageSquare, PhoneCall } from 'lucide-react';
 import { LeadSubmission } from '../types';
+import { submitLead } from '../lib/leads';
 
 interface ContactFormProps {
   forceFocusFormTrigger: number;
@@ -21,7 +22,9 @@ export default function ContactForm({ forceFocusFormTrigger }: ContactFormProps)
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [userLeads, setUserLeads] = useState<LeadSubmission[]>([]);
+  const [company, setCompany] = useState('');
 
   // Load existing test submissions on mount
   useEffect(() => {
@@ -103,22 +106,22 @@ export default function ContactForm({ forceFocusFormTrigger }: ContactFormProps)
     return isValid;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!validateForm()) return;
 
     setIsSubmitting(true);
+    setSubmitError('');
 
-    // Simulate cyber telemetry handshake with the E2Boost server
-    setTimeout(() => {
-      const newLead: LeadSubmission = {
-        id: crypto.randomUUID(),
+    try {
+      const newLead = await submitLead({
         name: formData.name,
         whatsapp: formData.whatsapp,
-        challenge: formData.challenge || 'Não especificado.',
-        submittedAt: new Date().toLocaleString('pt-BR')
-      };
+        challenge: formData.challenge || 'Nao especificado.',
+        source: 'formulario-contato',
+        company,
+      });
 
       try {
         const updated = [newLead, ...userLeads];
@@ -128,11 +131,14 @@ export default function ContactForm({ forceFocusFormTrigger }: ContactFormProps)
         console.error('Error saving lead', e);
       }
 
-      setIsSubmitting(false);
       setSubmitSuccess(true);
-      // Clear form
       setFormData({ name: '', whatsapp: '', challenge: '' });
-    }, 1800);
+      setCompany('');
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : 'Nao foi possivel enviar sua solicitacao.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -178,6 +184,17 @@ export default function ContactForm({ forceFocusFormTrigger }: ContactFormProps)
                   exit={{ opacity: 0 }}
                   className="space-y-6"
                 >
+                  <input
+                    type="text"
+                    name="company"
+                    value={company}
+                    onChange={(e) => setCompany(e.target.value)}
+                    className="hidden"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                  />
+
                   <div className="border-b border-white/5 pb-4 mb-6">
                     <h3 className="font-sans font-bold text-lg text-brand-text flex items-center gap-2">
                       <Sparkles className="w-5 h-5 text-brand-action animate-pulse" />
@@ -262,6 +279,13 @@ export default function ContactForm({ forceFocusFormTrigger }: ContactFormProps)
 
                   {/* Submit Button */}
                   <div className="pt-4">
+                    {submitError && (
+                      <div className="mb-4 flex items-center gap-2 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-xs font-mono text-red-300">
+                        <AlertCircle className="w-4 h-4 shrink-0" />
+                        <span>{submitError}</span>
+                      </div>
+                    )}
+
                     <button
                       type="submit"
                       disabled={isSubmitting}
