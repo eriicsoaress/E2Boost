@@ -21,6 +21,7 @@ import Portfolio from './components/Portfolio';
 import Method from './components/Method';
 import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
+import { submitLead } from './lib/leads';
 
 export default function App() {
   const { scrollYProgress } = useScroll();
@@ -29,7 +30,9 @@ export default function App() {
   const [modalStep, setModalStep] = useState<1 | 2>(1);
   const [modalLoading, setModalLoading] = useState(false);
   const [modalSuccess, setModalSuccess] = useState(false);
+  const [modalSubmitError, setModalSubmitError] = useState('');
   const [forceFocusContact, setForceFocusContact] = useState(0);
+  const [modalCompany, setModalCompany] = useState('');
 
   // Modal form states
   const [modalData, setModalData] = useState({
@@ -47,6 +50,7 @@ export default function App() {
   const handleOpenConsultation = () => {
     setModalStep(1);
     setModalSuccess(false);
+    setModalSubmitError('');
     setIsModalOpen(true);
   };
 
@@ -54,7 +58,7 @@ export default function App() {
     setForceFocusContact(prev => prev + 1);
   };
 
-  const handleModalSubmit = (e: React.FormEvent) => {
+  const handleModalSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // validation
@@ -74,36 +78,46 @@ export default function App() {
     if (!valid) return;
 
     setModalLoading(true);
+    setModalSubmitError('');
 
-    // Simulate scheduling booking
-    setTimeout(() => {
-      // Save to leads list in localStorage
+    try {
+      const challenge = `Consultoria agendada para: [${modalData.selectedService.toUpperCase()}] com perfil [${modalData.experience.toUpperCase()}]`;
+      const newLead = await submitLead({
+        name: modalData.name,
+        whatsapp: modalData.whatsapp,
+        challenge,
+        source: 'modal-consultoria',
+        company: modalCompany,
+      });
+
       try {
         const existing = localStorage.getItem('e2boost_leads');
         const leads = existing ? JSON.parse(existing) : [];
-        const newLead = {
-          id: crypto.randomUUID(),
-          name: modalData.name,
-          whatsapp: modalData.whatsapp,
-          challenge: `Consultoria agendada para: [${modalData.selectedService.toUpperCase()}] com perfil [${modalData.experience.toUpperCase()}]`,
-          submittedAt: new Date().toLocaleString('pt-BR')
-        };
         localStorage.setItem('e2boost_leads', JSON.stringify([newLead, ...leads]));
       } catch (e) {
         console.error(e);
       }
 
-      setModalLoading(false);
       setModalSuccess(true);
       setModalStep(2);
-      // Reset
+      setModalCompany('');
+    } catch (error) {
+      setModalSubmitError(error instanceof Error ? error.message : 'Nao foi possivel agendar sua consultoria.');
+    } finally {
+      setModalLoading(false);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    if (modalSuccess) {
       setModalData({
         name: '',
         whatsapp: '',
         selectedService: 'sites',
         experience: 'iniciante'
       });
-    }, 1500);
+    }
   };
 
   return (
@@ -156,7 +170,7 @@ export default function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setIsModalOpen(false)}
+              onClick={handleCloseModal}
               className="absolute inset-0 bg-brand-black/80 backdrop-blur-md cursor-pointer"
             />
 
@@ -173,7 +187,7 @@ export default function App() {
               
               {/* Close Button */}
               <button
-                onClick={() => setIsModalOpen(false)}
+                onClick={handleCloseModal}
                 className="absolute top-4 right-4 p-1 rounded-lg text-brand-text/50 hover:text-brand-text hover:bg-white/5 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
@@ -182,6 +196,17 @@ export default function App() {
               {/* Modal Step 1: Scheduling Form */}
               {modalStep === 1 ? (
                 <form onSubmit={handleModalSubmit} className="space-y-5">
+                  <input
+                    type="text"
+                    name="company"
+                    value={modalCompany}
+                    onChange={(e) => setModalCompany(e.target.value)}
+                    className="hidden"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                  />
+
                   <div className="text-center space-y-1">
                     <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-brand-support/20 border border-brand-action/30 mb-2">
                       <Calendar className="w-6 h-6 text-brand-action" />
@@ -300,6 +325,12 @@ export default function App() {
 
                   {/* Schedule submit CTA */}
                   <div className="pt-4">
+                    {modalSubmitError && (
+                      <div className="mb-4 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-xs font-mono text-red-300">
+                        {modalSubmitError}
+                      </div>
+                    )}
+
                     <button
                       type="submit"
                       disabled={modalLoading}
@@ -352,7 +383,7 @@ export default function App() {
 
                   <div className="pt-4 flex justify-center">
                     <button
-                      onClick={() => setIsModalOpen(false)}
+                      onClick={handleCloseModal}
                       className="px-6 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-brand-text font-sans font-bold text-xs tracking-wider transition-all cursor-pointer"
                     >
                       CONCLUIR SETUP
