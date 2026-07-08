@@ -15,6 +15,7 @@ type LeadRequest = {
 const app = express();
 const port = Number(process.env.PORT || 3001);
 const appUrl = process.env.APP_URL;
+const isProduction = process.env.NODE_ENV === 'production';
 const rateLimitWindowMs = 60_000;
 const maxRequestsPerWindow = 6;
 const requestLog = new Map<string, { count: number; resetAt: number }>();
@@ -160,10 +161,13 @@ app.post('/api/leads', enforceRateLimit, async (req, res) => {
       },
     });
   } catch (error) {
+    const message = error instanceof Error ? error.message : 'Erro desconhecido';
     console.error('Error saving lead:', error);
     return res.status(500).json({
       ok: false,
-      message: 'Nao foi possivel registrar sua solicitacao agora.',
+      message: isProduction
+        ? 'Nao foi possivel registrar sua solicitacao agora.'
+        : `Nao foi possivel registrar sua solicitacao agora: ${message}`,
     });
   }
 });

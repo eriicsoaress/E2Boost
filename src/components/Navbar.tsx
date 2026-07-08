@@ -117,6 +117,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center gap-3">
             <button
+              type="button"
               onClick={onOpenConsultation}
               className="relative p-2 rounded-xl bg-brand-action/10 border border-brand-action/30 text-brand-action hover:bg-brand-action hover:text-brand-black transition-colors"
               aria-label="Agendar Consultoria"
@@ -124,8 +125,12 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
               <CalendarCheck className="w-5 h-5" />
             </button>
             <button
+              type="button"
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-xl text-brand-text/80 hover:text-brand-text hover:bg-white/5 border border-transparent hover:border-white/10 transition-all focus:outline-none"
+              aria-expanded={isOpen}
+              aria-controls="mobile-navigation"
+              aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -136,42 +141,58 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
       {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="md:hidden glass-panel border-t border-white/5 bg-brand-black/95 overflow-hidden"
-          >
-            <div className="px-4 pt-2 pb-6 space-y-2">
-              {menuItems.map((item) => (
-                <button
-                  key={item.target}
-                  onClick={() => scrollToSection(item.target)}
-                  className={`block w-full text-left px-4 py-3 rounded-xl font-sans text-base font-semibold transition-colors ${
-                    activeSection === item.target
-                      ? 'text-brand-action bg-brand-support/20 border-l-4 border-brand-action'
-                      : 'text-brand-text/80 hover:text-brand-text hover:bg-white/5'
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
+          <>
+            <motion.button
+              type="button"
+              aria-label="Fechar menu"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setIsOpen(false)}
+              className="fixed inset-0 top-[96px] z-40 md:hidden bg-brand-black/55 backdrop-blur-sm"
+            />
 
-              <div className="pt-4 px-4">
-                <button
-                  onClick={() => {
-                    setIsOpen(false);
-                    onOpenConsultation();
-                  }}
-                  className="w-full relative px-5 py-3.5 rounded-xl bg-brand-action text-brand-black font-sans font-bold text-base tracking-wide flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,229,255,0.4)]"
-                >
-                  <CalendarCheck className="w-5 h-5" />
-                  <span>Agendar Consultoria</span>
-                </button>
+            <motion.div
+              id="mobile-navigation"
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25 }}
+              className="fixed left-0 right-0 top-[96px] z-50 md:hidden border-t border-white/5 bg-brand-black/95 px-4 pt-3 pb-6 shadow-2xl backdrop-blur-xl"
+            >
+              <div className="space-y-2">
+                {menuItems.map((item) => (
+                  <button
+                    key={item.target}
+                    type="button"
+                    onClick={() => scrollToSection(item.target)}
+                    className={`block w-full text-left px-4 py-3 rounded-xl font-sans text-base font-semibold transition-colors ${
+                      activeSection === item.target
+                        ? 'text-brand-action bg-brand-support/20 border-l-4 border-brand-action'
+                        : 'text-brand-text/80 hover:text-brand-text hover:bg-white/5'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+
+                <div className="pt-4">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsOpen(false);
+                      onOpenConsultation();
+                    }}
+                    className="w-full relative px-5 py-3.5 rounded-xl bg-brand-action text-brand-black font-sans font-bold text-base tracking-wide flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,229,255,0.4)]"
+                  >
+                    <CalendarCheck className="w-5 h-5" />
+                    <span>Agendar Consultoria</span>
+                  </button>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </nav>
