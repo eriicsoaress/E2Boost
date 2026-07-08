@@ -29,11 +29,11 @@ const journey = [
 ];
 
 const signalLines = [
-  'Google Search :: alta intencao',
-  'Meta Ads :: remarketing ativo',
-  'Landing page :: conversao monitorada',
-  'WhatsApp :: lead roteado',
-  'CRM :: oportunidade registrada'
+  'Google Search : Captura de demanda qualificada',
+  'Meta Ads : Escala e atração de público',
+  'Landing page : Interface de alta performance',
+  'WhatsApp : Atendimento rápido e sem atrito',
+  'CRM : Controle total do funil de vendas'
 ];
 
 export default function GrowthTheater() {
@@ -157,9 +157,9 @@ export default function GrowthTheater() {
               </div>
 
               <div className="mb-6 text-6xl font-extrabold tracking-tight">12x</div>
-              <h3 className="mb-3 text-2xl font-extrabold">Mais convincente do que promessa solta.</h3>
+              <h3 className="mb-3 text-2xl font-extrabold">Engenharia de Vendas Aplicada</h3>
               <p className="mb-8 text-sm leading-relaxed text-brand-black/75">
-                A animacao mostra a logica do servico enquanto vende: o visitante entende que existe metodo, controle e proxima acao.
+               Focamos na gestão inteligente da sua infraestrutura e na facilitação do contato direto com o lead, transformando cliques em clientes reais.
               </p>
 
               <div className="space-y-3">
