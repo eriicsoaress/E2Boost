@@ -366,7 +366,7 @@ export default function ContactForm({ forceFocusFormTrigger }: ContactFormProps)
                     
                     {/* Direct WhatsApp acceleration action */}
                     <a
-                      href={`https://api.whatsapp.com/send?phone=5562999999999&text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20consultoria%20com%20a%20E2Boost.`}
+                      href={`https://api.whatsapp.com/send?phone=556296471441&text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20consultoria%20com%20a%20E2Boost.`}
                       target="_blank"
                       rel="noreferrer"
                       className="px-6 py-2.5 rounded-xl bg-brand-action text-brand-black font-sans font-bold text-sm tracking-wide flex items-center justify-center gap-2 neon-glow hover:scale-105 transition-all cursor-pointer"

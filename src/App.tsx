@@ -147,7 +147,7 @@ export default function App() {
 
       {/* Floating Interactive WhatsApp Quick Connect Action */}
       <motion.a
-        href="https://api.whatsapp.com/send?phone=5562999999999&text=Ol%C3%A1%21%20Gostaria%20de%20conversar%20sobre%20as%20solu%C3%A7%C3%B5es%20da%20E2Boost."
+        href="https://api.whatsapp.com/send?phone=556296471441&text=Ol%C3%A1%21%20Gostaria%20de%20conversar%20sobre%20as%20solu%C3%A7%C3%B5es%20da%20E2Boost."
         target="_blank"
         rel="noreferrer"
         initial={{ scale: 0, opacity: 0 }}

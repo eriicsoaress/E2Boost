@@ -54,7 +54,7 @@ export default function Footer() {
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href="https://api.whatsapp.com/send?phone=5562999999999&text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20consultoria%20com%20a%20E2Boost."
+                href="https://api.whatsapp.com/send?phone=556296471441&text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20consultoria%20com%20a%20E2Boost."
                 target="_blank"
                 rel="noreferrer"
                 className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-text/80 hover:text-brand-action hover:border-brand-action/40 transition-all hover:scale-105"
