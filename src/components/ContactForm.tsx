@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Send, CheckCircle2, AlertCircle, Loader2, Sparkles, MessageSquare, PhoneCall } from 'lucide-react';
+import { Send, CheckCircle2, AlertCircle, Loader2, Sparkles, PhoneCall } from 'lucide-react';
 import { LeadSubmission } from '../types';
 import { submitLead } from '../lib/leads';
 
@@ -23,20 +23,8 @@ export default function ContactForm({ forceFocusFormTrigger }: ContactFormProps)
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
-  const [userLeads, setUserLeads] = useState<LeadSubmission[]>([]);
+  const [submittedLead, setSubmittedLead] = useState<LeadSubmission | null>(null);
   const [company, setCompany] = useState('');
-
-  // Load existing test submissions on mount
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem('e2boost_leads');
-      if (stored) {
-        setUserLeads(JSON.parse(stored));
-      }
-    } catch (e) {
-      console.error('Error loading leads', e);
-    }
-  }, []);
 
   // Handle auto scroll/focus if triggered by other CTAs
   useEffect(() => {
@@ -123,14 +111,7 @@ export default function ContactForm({ forceFocusFormTrigger }: ContactFormProps)
         company,
       });
 
-      try {
-        const updated = [newLead, ...userLeads];
-        localStorage.setItem('e2boost_leads', JSON.stringify(updated));
-        setUserLeads(updated);
-      } catch (e) {
-        console.error('Error saving lead', e);
-      }
-
+      setSubmittedLead(newLead);
       setSubmitSuccess(true);
       setFormData({ name: '', whatsapp: '', challenge: '' });
       setCompany('');
@@ -331,7 +312,7 @@ export default function ContactForm({ forceFocusFormTrigger }: ContactFormProps)
                   </div>
 
                   {/* Summary of submitted lead */}
-                  {userLeads.length > 0 && (
+                  {submittedLead && (
                     <div className="max-w-md mx-auto p-5 rounded-2xl bg-brand-black/55 border border-white/5 text-left space-y-3">
                       <span className="text-[10px] font-mono tracking-widest text-brand-action uppercase font-bold block border-b border-white/5 pb-2">
                         Resumo do Registro
@@ -339,18 +320,18 @@ export default function ContactForm({ forceFocusFormTrigger }: ContactFormProps)
                       <div className="text-xs space-y-1.5 text-brand-text/90 font-sans">
                         <div>
                           <strong className="text-brand-text/50 font-mono uppercase text-[10px] block">Nome:</strong>
-                          {userLeads[0].name}
+                          {submittedLead.name}
                         </div>
                         <div>
                           <strong className="text-brand-text/50 font-mono uppercase text-[10px] block">WhatsApp:</strong>
-                          {userLeads[0].whatsapp}
+                          {submittedLead.whatsapp}
                         </div>
                         <div className="line-clamp-2">
                           <strong className="text-brand-text/50 font-mono uppercase text-[10px] block">Desafio principal:</strong>
-                          {userLeads[0].challenge}
+                          {submittedLead.challenge}
                         </div>
                         <div className="text-[10px] text-brand-text/40 pt-1 text-right">
-                          Enviado em: {userLeads[0].submittedAt}
+                          Enviado em: {submittedLead.submittedAt}
                         </div>
                       </div>
                     </div>
@@ -380,53 +361,6 @@ export default function ContactForm({ forceFocusFormTrigger }: ContactFormProps)
             </AnimatePresence>
           </div>
         </div>
-
-        {/* Display previous test submissions from localStorage to demonstrate real client-side tracking */}
-        {userLeads.length > 1 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="mt-16 pt-8 border-t border-white/5 space-y-4"
-          >
-            <div className="flex items-center gap-2 text-brand-text/50">
-              <MessageSquare className="w-4 h-4 text-brand-action" />
-              <h4 className="font-mono text-xs uppercase tracking-wider font-bold">
-                Seu histórico de solicitações salvas localmente ({userLeads.length})
-              </h4>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {userLeads.slice(1, 3).map((lead) => (
-                <div key={lead.id} className="p-4 rounded-xl bg-white/5 border border-white/5 text-xs text-brand-text/70 space-y-2">
-                  <div className="flex justify-between font-mono text-[9px] text-brand-text/40">
-                    <span>REGISTRO RECORRENTE</span>
-                    <span>{lead.submittedAt}</span>
-                  </div>
-                  <div className="font-sans font-bold text-brand-text truncate">{lead.name}</div>
-                  <div className="font-mono text-[10px] text-brand-action">{lead.whatsapp}</div>
-                  <p className="line-clamp-2 text-brand-text/50 italic font-light">"{lead.challenge}"</p>
-                </div>
-              ))}
-            </div>
-            
-            {userLeads.length > 3 && (
-              <div className="text-center">
-                <button
-                  onClick={() => {
-                    try {
-                      localStorage.removeItem('e2boost_leads');
-                      setUserLeads([]);
-                    } catch (e) {}
-                  }}
-                  className="text-[10px] font-mono text-red-400 hover:underline bg-transparent border-none cursor-pointer"
-                >
-                  Limpar histórico local
-                </button>
-              </div>
-            )}
-          </motion.div>
-        )}
 
       </div>
     </section>

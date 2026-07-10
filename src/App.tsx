@@ -82,21 +82,13 @@ export default function App() {
 
     try {
       const challenge = `Consultoria agendada para: [${modalData.selectedService.toUpperCase()}] com perfil [${modalData.experience.toUpperCase()}]`;
-      const newLead = await submitLead({
+      await submitLead({
         name: modalData.name,
         whatsapp: modalData.whatsapp,
         challenge,
         source: 'modal-consultoria',
         company: modalCompany,
       });
-
-      try {
-        const existing = localStorage.getItem('e2boost_leads');
-        const leads = existing ? JSON.parse(existing) : [];
-        localStorage.setItem('e2boost_leads', JSON.stringify([newLead, ...leads]));
-      } catch (e) {
-        console.error(e);
-      }
 
       setModalSuccess(true);
       setModalStep(2);
