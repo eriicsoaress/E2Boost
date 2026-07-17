@@ -36,7 +36,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
   const menuItems = [
     { label: 'Home', target: 'home' },
     { label: 'Serviços', target: 'servicos' },
-    { label: 'Portfólio', target: 'portfolio' },
+    { label: 'Projetos', target: 'portfolio' },
     { label: 'Nosso Método', target: 'metodo' },
     { label: 'Contato', target: 'contato' },
   ];

@@ -6,21 +6,20 @@ import {
   X, 
   Check, 
   Loader2, 
-  Phone, 
   Globe, 
   TrendingUp, 
-  CloudLightning,
+  Bot,
   ChevronRight
 } from 'lucide-react';
 
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Solutions from './components/Solutions';
-import GrowthTheater from './components/GrowthTheater';
 import Portfolio from './components/Portfolio';
 import Method from './components/Method';
 import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
+import WhatsAppIcon from './components/WhatsAppIcon';
 import { submitLead } from './lib/leads';
 
 export default function App() {
@@ -127,10 +126,7 @@ export default function App() {
       
       <Solutions />
 
-      <GrowthTheater />
-      
       <Portfolio />
-      
       <Method />
       
       <ContactForm forceFocusFormTrigger={forceFocusContact} />
@@ -148,7 +144,7 @@ export default function App() {
         className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-brand-action text-brand-black flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.4)] hover:shadow-[0_0_30px_rgba(0,229,255,0.7)] transition-shadow duration-300 transform hover:scale-110 active:scale-95"
         title="WhatsApp Direct Connection"
       >
-        <Phone className="w-6 h-6 animate-pulse" />
+        <WhatsAppIcon className="w-7 h-7" />
         <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-brand-support border-2 border-brand-action"></span>
       </motion.a>
 
@@ -262,7 +258,7 @@ export default function App() {
                         {[
                           { value: 'sites', label: 'Criação Site', icon: Globe },
                           { value: 'trafego', label: 'Tráfego Ads', icon: TrendingUp },
-                          { value: 'governanca', label: 'Governança', icon: CloudLightning }
+                          { value: 'bot-ia', label: 'Bot de IA', icon: Bot }
                         ].map((serv) => {
                           const isSelected = modalData.selectedService === serv.value;
                           return (
@@ -369,7 +365,7 @@ export default function App() {
                       Ficha do Agendamento
                     </div>
                     <div>• <strong>Status:</strong> Confirmado (Aguardando Retorno)</div>
-                    <div>• <strong>Solução Alvo:</strong> {modalData.selectedService === 'sites' ? 'Arquitetura de Sites' : modalData.selectedService === 'trafego' ? 'Tráfego Pago Ads' : 'Governança & Gestão'}</div>
+                    <div>• <strong>Solução Alvo:</strong> {modalData.selectedService === 'sites' ? 'Arquitetura de Sites' : modalData.selectedService === 'trafego' ? 'Tráfego Pago Ads' : 'Bot de IA para WhatsApp'}</div>
                     <div>• <strong>Assessoria:</strong> Cortesia de Integração (Sem Custo)</div>
                   </div>
 

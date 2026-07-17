@@ -1,4 +1,5 @@
-import { Zap, Instagram, Linkedin, MessageCircle, ArrowUp } from 'lucide-react';
+import { Zap, Instagram, Linkedin, ArrowUp } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -60,7 +61,7 @@ export default function Footer() {
                 className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-text/80 hover:text-brand-action hover:border-brand-action/40 transition-all hover:scale-105"
                 title="WhatsApp Direct E2Boost"
               >
-                <MessageCircle className="w-5 h-5" />
+                <WhatsAppIcon className="w-5 h-5" />
               </a>
             </div>
 
@@ -76,13 +77,9 @@ export default function Footer() {
 
         </div>
 
-        {/* CNPJ / Disclaimer bottom footer bar */}
-        <div className="mt-8 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono text-brand-text/40">
+        <div className="mt-8 pt-8 border-t border-white/5 text-[11px] font-mono text-brand-text/40">
           <div className="text-center sm:text-left">
             © 2026 E2Boost - Gestão e Tráfego. Todos os direitos reservados.
-          </div>
-          <div className="text-center sm:text-right">
-            CNPJ: XX.XXX.XXX/0001-XX | Goiânia, GO
           </div>
         </div>
 

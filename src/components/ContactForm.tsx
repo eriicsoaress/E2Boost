@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Send, CheckCircle2, AlertCircle, Loader2, Sparkles, PhoneCall } from 'lucide-react';
+import { Send, CheckCircle2, AlertCircle, Loader2, Sparkles } from 'lucide-react';
 import { LeadSubmission } from '../types';
 import { submitLead } from '../lib/leads';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface ContactFormProps {
   forceFocusFormTrigger: number;
@@ -352,7 +353,7 @@ export default function ContactForm({ forceFocusFormTrigger }: ContactFormProps)
                       rel="noreferrer"
                       className="px-6 py-2.5 rounded-xl bg-brand-action text-brand-black font-sans font-bold text-sm tracking-wide flex items-center justify-center gap-2 neon-glow hover:scale-105 transition-all cursor-pointer"
                     >
-                      <PhoneCall className="w-4 h-4" />
+                      <WhatsAppIcon className="w-4 h-4" />
                       Acelerar via WhatsApp
                     </a>
                   </div>

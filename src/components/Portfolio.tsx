@@ -84,34 +84,34 @@ export default function Portfolio() {
   };
 
   return (
-    <section id="portfolio" className="py-24 relative bg-brand-black overflow-hidden">
+    <section id="portfolio" className="portfolio-premium py-24 relative bg-brand-black overflow-hidden">
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-brand-action/5 rounded-full blur-[140px] pointer-events-none"></div>
       <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-brand-support/10 rounded-full blur-[140px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div className="portfolio-heading text-center max-w-3xl mx-auto mb-16 space-y-4">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-brand-action font-mono text-xs font-semibold tracking-widest uppercase"
           >
-            NOSSOS CASOS DE SUCESSO
+            PROJETOS REAIS · RESULTADOS VISÍVEIS
           </motion.div>
           <h2 className="font-sans font-extrabold text-3xl sm:text-4xl lg:text-5xl text-brand-text tracking-tight">
-            Nossos Clientes Otimizados
+            Marcas que ganharam uma presença digital <span className="text-brand-action">à altura do seu potencial.</span>
           </h2>
           <p className="text-brand-text/70 text-lg font-light">
-            Conheça alguns dos projetos onde construímos a infraestrutura técnica e aceleramos os resultados em vendas.
+            Cada projeto nasce de uma estratégia própria. Explore interfaces reais que unem clareza, velocidade e caminhos mais curtos até a conversão.
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <div className="project-tabs flex flex-wrap justify-center gap-4 mb-12">
           {projects.map((project) => (
             <button
               key={project.id}
               onClick={() => setActiveTab(project.id)}
-              className={`px-6 py-3 rounded-2xl font-sans font-semibold text-sm transition-all duration-300 relative border cursor-pointer ${
+              className={`project-tab px-6 py-3 rounded-2xl font-sans font-semibold text-sm transition-all duration-300 relative border cursor-pointer ${
                 activeTab === project.id
                   ? 'bg-brand-support/20 border-brand-action text-brand-action shadow-[0_0_15px_rgba(0,229,255,0.2)]'
                   : 'bg-white/5 border-white/5 text-brand-text/70 hover:bg-white/10 hover:border-white/10'
@@ -125,8 +125,8 @@ export default function Portfolio() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-5 space-y-6">
+        <div className="portfolio-showcase grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="portfolio-copy lg:col-span-5 space-y-6">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeProject.id}
@@ -161,7 +161,7 @@ export default function Portfolio() {
                     </p>
                   </div>
 
-                  <div className="space-y-1.5 p-4 rounded-2xl bg-brand-support/10 border border-brand-support/20 relative overflow-hidden">
+                  <div className="result-card space-y-1.5 p-4 rounded-2xl bg-brand-support/10 border border-brand-support/20 relative overflow-hidden">
                     <span className="text-xs font-mono text-brand-action uppercase font-bold flex items-center gap-1.5">
                       <motion.span className="w-1.5 h-1.5 rounded-full bg-brand-action inline-block animate-ping" />
                       Resultado Consolidado:
@@ -197,7 +197,7 @@ export default function Portfolio() {
               </span>
             </div>
 
-            <div className="relative rounded-2xl border border-white/10 overflow-hidden shadow-2xl bg-brand-black group">
+            <div className="project-browser relative rounded-2xl border border-white/10 overflow-hidden shadow-2xl bg-brand-black group">
               <div className="h-8 bg-white/5 border-b border-white/10 flex items-center px-4 gap-2">
                 <div className="flex gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-red-500/50 block"></span>
