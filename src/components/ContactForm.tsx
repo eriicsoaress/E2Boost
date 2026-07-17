@@ -196,6 +196,8 @@ export default function ContactForm({ forceFocusFormTrigger }: ContactFormProps)
                       <input
                         id="client-name"
                         type="text"
+                        name="name"
+                        autoComplete="name"
                         value={formData.name}
                         onChange={(e) => handleTextChange(e, 'name')}
                         placeholder="Ex: João Silva"
@@ -223,7 +225,10 @@ export default function ContactForm({ forceFocusFormTrigger }: ContactFormProps)
                     <div className="relative">
                       <input
                         id="client-whatsapp"
-                        type="text"
+                        type="tel"
+                        name="whatsapp"
+                        autoComplete="tel"
+                        inputMode="tel"
                         value={formData.whatsapp}
                         onChange={handlePhoneChange}
                         placeholder="(62) 99999-9999"
@@ -250,6 +255,7 @@ export default function ContactForm({ forceFocusFormTrigger }: ContactFormProps)
                     </label>
                     <textarea
                       id="client-challenge"
+                      name="challenge"
                       rows={4}
                       value={formData.challenge}
                       onChange={(e) => handleTextChange(e, 'challenge')}

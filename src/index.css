@@ -20,6 +20,11 @@ html {
   overflow-x: hidden;
 }
 
+section[id] { scroll-margin-top: 88px; }
+button, a, input, textarea, select { -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 2px solid #00e5ff; outline-offset: 3px; }
+input::placeholder, textarea::placeholder { color: rgba(248, 249, 250, 0.3); }
+
 /* Custom glassmorphism classes */
 .glass-panel {
   background: rgba(26, 11, 46, 0.45);
@@ -132,3 +137,17 @@ body { margin:0; background:#12051f; }
 .portfolio-premium{background:radial-gradient(circle at 50% 12%,rgba(123,44,191,.19),transparent 35%),#0b0415!important}.portfolio-heading h2{line-height:1.05;letter-spacing:-.045em}.portfolio-heading p{max-width:680px;margin-left:auto;margin-right:auto;line-height:1.7}.project-tabs{position:relative}.project-tabs:before{content:"SELECIONE UM CASE";position:absolute;top:-24px;color:#ffffff45;font:8px 'JetBrains Mono';letter-spacing:.18em}.project-tab{min-width:175px;backdrop-filter:blur(14px)}.portfolio-showcase{padding:34px;border:1px solid #ffffff10;border-radius:24px;background:linear-gradient(145deg,#ffffff08,transparent 48%);box-shadow:0 40px 90px #0007}.portfolio-copy{padding-left:8px}.result-card{background:linear-gradient(135deg,rgba(0,229,255,.1),rgba(123,44,191,.12))!important;border-color:rgba(0,229,255,.2)!important;box-shadow:inset 0 1px #ffffff0b}.project-browser{border-color:#ffffff1c!important;box-shadow:0 28px 70px #000b,0 0 45px rgba(0,229,255,.06)!important;transition:transform .35s,border-color .35s}.project-browser:hover{transform:translateY(-5px);border-color:rgba(0,229,255,.35)!important}
 @media(max-width:760px){.hero-new{min-height:690px}.hero-inner h1{font-size:40px}.hero-inner p{font-size:14px}.section{padding:80px 20px}.service-card,.service-card.wide,.service-card:nth-child(2),.service-card:nth-child(3),.manifesto{grid-column:span 12;min-height:205px}.why-section{margin:0 16px 70px;padding:45px 22px;grid-template-columns:1fr;gap:35px}.why-copy h2{font-size:32px}.studio-visual{height:280px}.studio-screen{inset:30px 20px}.scroll-mark{display:none}.portfolio-showcase{padding:18px;border-radius:18px}.portfolio-copy{padding-left:0}.project-tab{min-width:145px}}
 @media(max-width:760px){.hero-new{min-height:100svh;padding-top:110px;padding-bottom:70px}}
+
+/* Refined spacing between portfolio and differentiators */
+#portfolio{padding-bottom:56px!important}
+.why-shell{padding:72px 0;background:linear-gradient(180deg,#160724 0%,#140521 100%)}
+.why-section{width:calc(100% - 64px);max-width:1500px;box-sizing:border-box;margin:0 auto;padding:72px clamp(52px,5vw,88px);grid-template-columns:minmax(0,.95fr) minmax(480px,1.05fr);gap:clamp(64px,7vw,118px);background:linear-gradient(135deg,#211033 0%,#1d0d30 100%);box-shadow:0 30px 80px rgba(4,0,12,.24)}
+@media(max-width:1024px){.why-section{width:calc(100% - 40px);padding:56px 40px;grid-template-columns:1fr;gap:44px}.studio-visual{max-width:720px;width:100%;margin:0 auto}}
+@media(max-width:760px){#portfolio{padding-bottom:40px!important}.why-shell{padding:48px 0}.why-section{width:calc(100% - 32px);margin:0 auto;padding:42px 22px;gap:34px}}
+
+/* Final conversion and interaction polish */
+#contato{background:radial-gradient(circle at 50% 35%,rgba(123,44,191,.16),transparent 45%),#0b0415!important}
+#contato-form-container>div:last-child{background:linear-gradient(145deg,rgba(35,20,55,.92),rgba(18,5,31,.9));box-shadow:0 32px 90px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.05)!important}
+#contato input,#contato textarea{transition:border-color .2s,background-color .2s,box-shadow .2s}
+#contato input:hover,#contato textarea:hover{border-color:rgba(255,255,255,.18);background-color:rgba(11,4,21,.62)}
+#contato input:focus,#contato textarea:focus{box-shadow:0 0 0 3px rgba(0,229,255,.08)}

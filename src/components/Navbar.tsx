@@ -37,7 +37,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
     { label: 'Home', target: 'home' },
     { label: 'Serviços', target: 'servicos' },
     { label: 'Projetos', target: 'portfolio' },
-    { label: 'Nosso Método', target: 'metodo' },
+    { label: 'Diferenciais', target: 'metodo' },
     { label: 'Contato', target: 'contato' },
   ];
 
@@ -70,7 +70,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="shrink-0 flex items-center gap-2 cursor-pointer" onClick={() => scrollToSection('home')}>
+          <button type="button" aria-label="Voltar ao início" className="shrink-0 flex items-center gap-2 cursor-pointer" onClick={() => scrollToSection('home')}>
             <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-brand-support/20 border border-brand-action/40 shadow-[0_0_15px_rgba(0,229,255,0.2)]">
               <Zap className="w-5 h-5 text-brand-action animate-pulse" />
               <div className="absolute inset-0 rounded-xl bg-brand-action/5 blur-sm"></div>
@@ -78,7 +78,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
             <span className="font-sans font-bold text-xl tracking-wider text-brand-text flex items-center">
               E2<span className="text-brand-action neon-text-glow">Boost</span>
             </span>
-          </div>
+          </button>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">

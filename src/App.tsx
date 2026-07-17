@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
 import { 
   Zap, 
@@ -32,6 +32,18 @@ export default function App() {
   const [modalSubmitError, setModalSubmitError] = useState('');
   const [forceFocusContact, setForceFocusContact] = useState(0);
   const [modalCompany, setModalCompany] = useState('');
+
+  useEffect(() => {
+    document.body.style.overflow = isModalOpen ? 'hidden' : '';
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsModalOpen(false);
+    };
+    if (isModalOpen) window.addEventListener('keydown', handleEscape);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleEscape);
+    };
+  }, [isModalOpen]);
 
   // Modal form states
   const [modalData, setModalData] = useState({
@@ -143,6 +155,7 @@ export default function App() {
         transition={{ delay: 1, type: 'spring', stiffness: 260, damping: 20 }}
         className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-brand-action text-brand-black flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.4)] hover:shadow-[0_0_30px_rgba(0,229,255,0.7)] transition-shadow duration-300 transform hover:scale-110 active:scale-95"
         title="WhatsApp Direct Connection"
+        aria-label="Conversar com a E2Boost pelo WhatsApp"
       >
         <WhatsAppIcon className="w-7 h-7" />
         <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-brand-support border-2 border-brand-action"></span>
@@ -155,6 +168,10 @@ export default function App() {
             
             {/* Modal Backdrop Blur */}
             <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="consultation-title"
+              aria-label="Agendamento de consultoria E2Boost"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -175,7 +192,9 @@ export default function App() {
               
               {/* Close Button */}
               <button
+                type="button"
                 onClick={handleCloseModal}
+                aria-label="Fechar agendamento"
                 className="absolute top-4 right-4 p-1 rounded-lg text-brand-text/50 hover:text-brand-text hover:bg-white/5 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
@@ -199,7 +218,7 @@ export default function App() {
                     <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-brand-support/20 border border-brand-action/30 mb-2">
                       <Calendar className="w-6 h-6 text-brand-action" />
                     </div>
-                    <h3 className="font-sans font-extrabold text-2xl text-brand-text tracking-tight">
+                    <h3 id="consultation-title" className="font-sans font-extrabold text-2xl text-brand-text tracking-tight">
                       Agendar Consultoria
                     </h3>
                     <p className="text-brand-text/60 text-xs sm:text-sm max-w-xs mx-auto">
@@ -216,6 +235,8 @@ export default function App() {
                       </label>
                       <input
                         type="text"
+                        name="name"
+                        autoComplete="name"
                         value={modalData.name}
                         onChange={(e) => setModalData(prev => ({ ...prev, name: e.target.value }))}
                         placeholder="Ex: Carlos Costa"
@@ -235,7 +256,10 @@ export default function App() {
                         Seu WhatsApp com DDD *
                       </label>
                       <input
-                        type="text"
+                        type="tel"
+                        name="whatsapp"
+                        autoComplete="tel"
+                        inputMode="tel"
                         value={modalData.whatsapp}
                         onChange={(e) => setModalData(prev => ({ ...prev, whatsapp: e.target.value }))}
                         placeholder="Ex: (62) 99999-8888"

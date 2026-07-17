@@ -28,7 +28,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-brand-text/50 text-xs font-sans max-w-xs leading-relaxed">
-              Infraestrutura sólida, tráfego qualificado e gerenciamento premium para escalar sua marca.
+              Sites sob medida, tráfego qualificado e automações com IA para escalar sua marca.
             </p>
           </div>
 
