@@ -15,10 +15,14 @@ export default function Hero({ onCtaClick }: { onCtaClick: () => void }) {
       </div>
       <div className="hero-background-treatment" aria-hidden="true" />
       <motion.div className="hero-inner" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .75 }}>
-        <div className="eyebrow"><Sparkles size={13}/> A E2Boost transforma alta performance em escala</div>
-        <h1>NÃO FAZEMOS SITES.<br/>CONSTRUÍMOS <em>MÁQUINAS DE<br/>VENDAS</em> EXCLUSIVAS.</h1>
-        <p>Esqueça os templates genéricos. Desenvolvemos sua infraestrutura digital 100% do zero, integrada com inteligência artificial e automações para escalar o seu negócio 24 horas por dia.</p>
-        <button className="primary-btn" onClick={onCtaClick}>QUERO UM PROJETO SOB MEDIDA <ArrowRight size={15}/></button>
+        <div className="eyebrow"><Sparkles size={13}/> Estratégia, tecnologia e automação para escalar</div>
+        <h1>
+          <span>NÃO CRIAMOS SÓ SITES.</span>
+          <span>CONSTRUÍMOS</span>
+          <em>MÁQUINAS DE VENDAS.</em>
+        </h1>
+        <p>Unimos estratégia, design, tecnologia, inteligência artificial e automação para transformar sua presença digital em uma operação de vendas sob medida — pronta para atrair, converter e escalar.</p>
+        <button className="primary-btn" onClick={onCtaClick}>QUERO UMA ESTRUTURA QUE VENDE <ArrowRight size={15}/></button>
       </motion.div>
       <div className="scroll-mark"><span>SCROLL</span><i/></div>
     </section>
