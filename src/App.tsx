@@ -153,7 +153,7 @@ export default function App() {
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 1, type: 'spring', stiffness: 260, damping: 20 }}
-        className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-brand-action text-brand-black flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.4)] hover:shadow-[0_0_30px_rgba(0,229,255,0.7)] transition-shadow duration-300 transform hover:scale-110 active:scale-95"
+        className="whatsapp-float fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-brand-action text-brand-black flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.4)] hover:shadow-[0_0_30px_rgba(0,229,255,0.7)] transition-shadow duration-300 transform hover:scale-110 active:scale-95"
         title="WhatsApp Direct Connection"
         aria-label="Conversar com a E2Boost pelo WhatsApp"
       >
