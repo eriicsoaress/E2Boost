@@ -154,7 +154,7 @@ export default function ContactForm({ forceFocusFormTrigger }: ContactFormProps)
           {/* Neon outer border glow effect */}
           <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-action/20 to-brand-support/30 rounded-3xl blur opacity-70"></div>
           
-          <div className="relative glass-panel p-8 sm:p-10 rounded-3xl border-white/10 shadow-2xl">
+          <div className="depth-card relative glass-panel p-8 sm:p-10 rounded-3xl border-white/10 shadow-2xl">
             <AnimatePresence mode="wait">
               {!submitSuccess ? (
                 // FORM STATE

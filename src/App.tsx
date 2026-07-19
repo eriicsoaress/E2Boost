@@ -185,7 +185,7 @@ export default function App() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               transition={{ type: 'spring', duration: 0.5 }}
-              className="relative w-full max-w-lg glass-panel p-6 sm:p-8 rounded-3xl border-white/10 shadow-[0_20px_50px_rgba(0,229,255,0.15)] overflow-hidden"
+              className="depth-card relative w-full max-w-lg glass-panel p-6 sm:p-8 rounded-3xl border-white/10 shadow-[0_20px_50px_rgba(0,229,255,0.15)] overflow-hidden"
             >
               {/* Neon border glow bar */}
               <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-brand-action via-brand-support to-brand-action"></div>

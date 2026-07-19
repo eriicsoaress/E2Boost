@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { ChevronLeft, ChevronRight, ExternalLink, Images } from 'lucide-react';
 import { Project } from '../types';
+import { CardBody, CardContainer, CardItem } from './ui/3d-card';
 
 const screenshotUrl = (url: string, width = 1600) =>
   `https://s.wordpress.com/mshots/v1/${encodeURIComponent(url)}?w=${width}`;
@@ -161,7 +162,7 @@ export default function Portfolio() {
                     </p>
                   </div>
 
-                  <div className="result-card space-y-1.5 p-4 rounded-2xl bg-brand-support/10 border border-brand-support/20 relative overflow-hidden">
+                  <div className="result-card depth-card space-y-1.5 p-4 rounded-2xl bg-brand-support/10 border border-brand-support/20 relative overflow-hidden">
                     <span className="text-xs font-mono text-brand-action uppercase font-bold flex items-center gap-1.5">
                       <motion.span className="w-1.5 h-1.5 rounded-full bg-brand-action inline-block animate-ping" />
                       Resultado Consolidado:
@@ -197,6 +198,9 @@ export default function Portfolio() {
               </span>
             </div>
 
+            <CardContainer containerClassName="w-full" className="w-full" intensity={3.5}>
+              <CardBody className="h-auto w-full">
+                <CardItem translateZ={24} className="w-full">
             <div className="project-browser relative rounded-2xl border border-white/10 overflow-hidden shadow-2xl bg-brand-black group">
               <div className="h-8 bg-white/5 border-b border-white/10 flex items-center px-4 gap-2">
                 <div className="flex gap-1.5">
@@ -265,6 +269,9 @@ export default function Portfolio() {
                 ))}
               </div>
             </div>
+                </CardItem>
+              </CardBody>
+            </CardContainer>
           </div>
         </div>
       </div>
